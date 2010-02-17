@@ -50,13 +50,13 @@ function getCouleur($annee) {
 			$couleur='#00FF00';
 			break;
 		case 1999:
-			$couleur='#A0A0A0';
+			$couleur='#1E1E1E';
 			break;
 		case 1998:
 			$couleur='#808080';
 			break;
 		case 1997:
-			$couleur='#404040';
+			$couleur='#606060';
 			break;
 		default:
 			$couleur='#000000';
