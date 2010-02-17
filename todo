@@ -18,3 +18,11 @@ problemes :
 == Annonces LBC 
 	pas mal d'annonces non parsées pour cause de données manquantes.
 	prevoir un petit formulaire pour completer les manques a la main ? L'ideal : une frame avec une preview de l'annonce, pour la lire en meme temps :)
+
+== toutes annonces
+	prevoir des suppression semi-auto (avec visualisation des données avant suppression) post importation :
+	exemple: tout ce qui est de type XXX et ne contient pas XXX, ou prix < 1500  ou km < 200 , etc...
+
+== faire des graph comparatifs des models
+	prix moyen par model / année
+	km moyen par model / année
