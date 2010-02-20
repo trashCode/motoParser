@@ -5,12 +5,14 @@
 	include 'db.php';
 	
 	function randHexColor(){
-		
-		$RGB = HSV_TO_RGB(rand(0,360)/360,1,0.4);
+		$h = rand(0,2)/3;
+		echo $h . " ";
+		$RGB = HSV_TO_RGB($h,1,0.5);
 		// echo $RGB['R'] . '  -  ' . $RGB['G']  . '  -  ' . $RGB['B'] . '<br/>' ;
 		//return '#' . dechex($RGB['R']).dechex($RGB['G']).dechex($RGB['B']); // ne marche pas ! car dechex(0) = 0, et non 00 ! 
 		//return '#' . dechex($RGB['R']*256*256+$RGB['G']*256+$rgb[B]); //toujours pas ! si $RGB['R'] = 0, on as le meme probleme.
-		return '#' . substr(dechex(pow(256,3)+$RGB['R']*256*256+$RGB['G']*256+$rgb[B]),1); //roh, je suis un truant !
+		print_r($RGB);
+		return '#' . substr(dechex(pow(256,3)+$RGB['R']*256*256+$RGB['G']*256+$RGB['B']),1); //roh, je suis un truant !
 		
 	}
 	
@@ -109,9 +111,9 @@
 			}
 	}
 	
-	// for ($i=0;$i<100;$i++) {
-		// echo randHexColor() . '<br/>';
-	// }
+	for ($i=0;$i<100;$i++) {
+		echo randHexColor() . '<br/>';
+	}
 	
 	//initialisation du graphique.
 	$chart = new open_flash_chart();
@@ -238,6 +240,7 @@
 	$y->set_range( 0, smartFloor($maxNb) );
 	$y->set_steps(10);
 	$chart->set_y_axis( $y );
+	//$chart->set_bg_colour( '#0A0A0A' );
 	
 	echo $chart->toString();
 
