@@ -112,6 +112,8 @@
 	}
 	
 	function smartFloor($i, $rupture = 0.77) {
+	//$i = la valeur max des donée du graph, qui sert pour determiner le plafond intelligent
+	//$rupture = la valeur a partir de laquelle on monte le plafond a l'unité superrieur. Calcul : c'est la partie decimal du log en base 10 de la valeure de rupture. exemple : log10(6) = 0.77815 ou log10(600) = 2.77815, on change donc par default des qu'on passe les 6...
 			if (log10($i) - (int)log10($i) < $rupture) {
 				return ceil($i/pow(10,floor(log10($i)))) * pow(10,floor(log10($i)));
 			} else {
