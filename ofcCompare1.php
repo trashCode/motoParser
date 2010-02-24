@@ -256,7 +256,7 @@
 	$y->set_range( 0, smartFloor($maxNb) );
 	$y->set_steps(10);
 	$chart->set_y_axis( $y );
-	//$chart->set_bg_colour( '#0A0A0A' );
+	$chart->set_bg_colour( '#666666' );
 	
 	echo $chart->toString();
 
