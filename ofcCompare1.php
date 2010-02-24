@@ -5,15 +5,23 @@
 	include 'db.php';
 	
 	function randHexColor(){
-		$h = rand(0,2)/3;
-		echo $h . " ";
-		$RGB = HSV_TO_RGB($h,1,0.5);
+		$h = rand(0,23)/24;
+		$RGB = HSV_TO_RGB($h,0.7,1);
 		// echo $RGB['R'] . '  -  ' . $RGB['G']  . '  -  ' . $RGB['B'] . '<br/>' ;
 		//return '#' . dechex($RGB['R']).dechex($RGB['G']).dechex($RGB['B']); // ne marche pas ! car dechex(0) = 0, et non 00 ! 
 		//return '#' . dechex($RGB['R']*256*256+$RGB['G']*256+$rgb[B]); //toujours pas ! si $RGB['R'] = 0, on as le meme probleme.
-		print_r($RGB);
-		return '#' . substr(dechex(pow(256,3)+$RGB['R']*256*256+$RGB['G']*256+$RGB['B']),1); //roh, je suis un truant !
+		return '#' . substr(dechex(pow(256,3)+(int)$RGB['R']*256*256+(int)$RGB['G']*256+(int)$RGB['B']),1); //roh, je suis un truant ! 
+				//le substr(pow(256,3)... est la pour donner les eventuels zeros signigicatifs (si RGB['R']<=16) 
+				//ps : ne pas oublier le (int), sinon les valeures a virgules perturbent la valeure suivante
 		
+	}
+	
+	function htmlHex($RGB){
+		if (!(isset($RGB['R'])) and !(isset($RGB['R'])) and !(isset($RGB['R']))){
+			echo 'ERREUR : tableau en entrée invalide';
+		}
+		return '#' . substr(dechex(pow(256,3)+(int)$RGB['R']*256*256+(int)$RGB['G']*256+(int)$RGB['B']),1); 
+	
 	}
 	
 	function randHexColor2(){
@@ -23,8 +31,9 @@
 		
 	}
 	
-	function RGB_TO_HSV ($R, $G, $B) // RGB Values:Number 0-255
-	{ // HSV Results:Number 0-1
+	function RGB_TO_HSV ($R, $G, $B) { 
+		// HSV Results:Number 0-1
+		// RGB Values:Number 0-255
 		$HSL = array();
 
 		$var_R = ($R / 255);
@@ -69,6 +78,7 @@
 	// HSV Values:Number 0-1
 	// RGB Results:Number 0-255
 		$RGB = array();
+		if ($H == 1) {$H=0;}
 
 		if($S == 0)
 		{
@@ -101,8 +111,6 @@
 		return $RGB;
 	}
 	
-	
-	
 	function smartFloor($i, $rupture = 0.77) {
 			if (log10($i) - (int)log10($i) < $rupture) {
 				return ceil($i/pow(10,floor(log10($i)))) * pow(10,floor(log10($i)));
@@ -111,9 +119,16 @@
 			}
 	}
 	
-	for ($i=0;$i<100;$i++) {
-		echo randHexColor() . '<br/>';
-	}
+	
+	//
+	//Pseudo Main
+	//
+	// $RGB= array();
+	
+	// for ($i=0;$i<100;$i++) {
+			// echo randHexColor() ."<br/>\n";
+	// }
+	
 	
 	//initialisation du graphique.
 	$chart = new open_flash_chart();
@@ -174,6 +189,7 @@
 		$bar = new bar();
 		if (($_GET["couleur"]) == 'black') {$bar->colour('#000000');}
 		else {
+			$bar->set_alpha(0.8);
 			$bar->colour( randHexColor());
 			}
 		$bar->key($model, 12);

@@ -2,8 +2,9 @@
 	
 	include 'ofc/php-ofc-library/open-flash-chart.php';
 	include 'ofc/php-ofc-library/ofc_sugar.php';
-	function RGB_TO_HSV ($R, $G, $B) // RGB Values:Number 0-255
-		{ // HSV Results:Number 0-1
+	function RGB_TO_HSV ($R, $G, $B) { 
+	// HSV Results:Number 0-1
+	// RGB Values:Number 0-255
 			$HSL = array();
 
 			$var_R = ($R / 255);
@@ -44,8 +45,9 @@
 			return $HSL;
 		}
 
-		function HSV_TO_RGB ($H, $S, $V) // HSV Values:Number 0-1
-		{ // RGB Results:Number 0-255
+	function HSV_TO_RGB ($H, $S, $V) { 
+			// RGB Results:Number 0-255
+			 // HSV Values:Number 0-1
 			$RGB = array();
 
 			if($S == 0)
