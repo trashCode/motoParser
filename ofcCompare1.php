@@ -120,24 +120,10 @@
 	}
 	
 	
-	//
-	//Pseudo Main
-	//
-	// $RGB= array();
-	
-	// for ($i=0;$i<100;$i++) {
-			// echo randHexColor() ."<br/>\n";
-	// }
-	
-	
 	//initialisation du graphique.
 	$chart = new open_flash_chart();
 	$chart->set_title( $title );
-	
-	
-	
-	
-	
+
 	//recuparation de toutes les annees contenant des annonces;
 	$sql = 'SELECT distinct annee FROM annonce ORDER BY annee;';
 	$rs= mysql_query($sql);
@@ -193,7 +179,9 @@
 			$bar->colour( randHexColor());
 			}
 		$bar->key($model, 12);
-		$bar->set_values($nbs );
+		if ($_GET['type'] == 'nb') {$bar->set_values($nbs );}
+		else if ($_GET['type'] == 'prix') {$bar->set_values($prixs );}
+		else if ($_GET['type'] == 'km') {$bar->set_values($kms );}
 		
 		$chart->add_element( $bar ); //ajout de la serie au graph
 		
@@ -253,7 +241,11 @@
 	$y = new x_axis();
 	//$maxKm=round($maxKm/pow(10,floor(log10($maxKm))),1)*pow(10,floor(log10($maxKm)));
 	//$maxPrix=round($maxPrix/pow(10,floor(log10($maxPrix))),1)*pow(10,floor(log10($maxPrix)));
-	$y->set_range( 0, smartFloor($maxNb) );
+	
+	
+	if ($_GET['type'] == 'nb') {$y->set_range( 0, smartFloor($maxNb) );}
+	else if ($_GET['type'] == 'prix') {$y->set_range( 0, smartFloor($maxPrix) );}
+	else if ($_GET['type'] == 'km') {$y->set_range( 0, smartFloor($maxKm) );}
 	$y->set_steps(10);
 	$chart->set_y_axis( $y );
 	$chart->set_bg_colour( '#666666' );

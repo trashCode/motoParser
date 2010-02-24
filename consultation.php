@@ -1,5 +1,6 @@
 ﻿<?php
 	require "entete.php";
+	entete();
 ?>
 <p>Annonces de la base</p>
  

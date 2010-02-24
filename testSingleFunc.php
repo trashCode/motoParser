@@ -14,6 +14,8 @@
 	require_once "annonce.class.php";
 	error_reporting(E_ALL | E_STRICT);
 	
+	entete();
+	
 
 	
 		

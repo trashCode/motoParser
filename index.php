@@ -4,6 +4,9 @@
 	require_once "db.php";
 	
 	require "entete.php";
+	
+	entete();
+	
 	$sql = 'SELECT count(*) FROM annonce;';
 	$rs = mysql_query($sql);
 	$count = mysql_fetch_array($rs);
