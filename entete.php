@@ -3,9 +3,16 @@
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr-FR" lang="fr-FR">
 	<head>
-		<title>Parser Annonce v0.1beta</title>
+		<script type="text/javascript" src="swfobject/swfobject.js"></script>
+<script type="text/javascript">
+swfobject.embedSWF("open-flash-chart.swf", "my_chart", "900", "550", "9.0.0");
+</script>
+	<title>Parser Annonce v0.1beta</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<link href="styles.css" media="all" rel="stylesheet" type="text/css" />
+		
+
+		
 	</head>
 	<body>
 	<div class="bandeauFond">
