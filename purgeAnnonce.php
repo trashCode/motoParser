@@ -1,5 +1,6 @@
 ﻿<?php
 	require "entete.php";
+	entete();
 	require "db.php";
 	
 	$sql = 'DELETE FROM annonce;';
@@ -11,5 +12,6 @@
 	}
 	
 	require 'pied.php';
+	pied();
 ?>
 	

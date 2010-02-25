@@ -62,6 +62,7 @@
 	
 	
 	require "pied.php";
+	pied();
 	$temps_fin = microtime(true);
 	echo "<!-- Temps d\'execution : ".round($temps_fin - $temps_debut, 4) . " secondes -->";
 

@@ -14,6 +14,17 @@
 		
 	}
 	
+	function getXColors($x){
+		$colors = array();
+		for($H=0;$H<x;$H++){
+			$h = $H/$x;
+			echo $h;
+			$RGB = HSV_TO_RGB($h,0.7,1);
+			$colors[] = '#' . substr(dechex(pow(256,3)+(int)$RGB['R']*256*256+(int)$RGB['G']*256+(int)$RGB['B']),1); 
+		}
+		return $colors;
+	}
+	
 	function randHexColor2(){
 		
 		return '#' . (dechex(rand(50,240)).dechex(rand(50,240)).dechex(rand(50,241)));
@@ -195,6 +206,8 @@
 	echo '<br/>';
 	echo print_r(array_unique($values2));
 	
+	
+	print_r(getXColors(3));
 	
 	
 	

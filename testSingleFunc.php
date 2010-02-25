@@ -41,4 +41,5 @@
 
 	echo '<div class="piedFond" style="text-align: right; font-size: 0.7em;"> Temps d\'execution : '.round($temps_fin - $temps_debut, 4) . ' secondes </div>';
 	require "pied.php";
+	pied();
 ?>

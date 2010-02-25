@@ -28,4 +28,5 @@
 
 <?php
 	require "pied.php";
+	pied();
 ?>

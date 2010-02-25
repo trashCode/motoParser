@@ -16,6 +16,16 @@
 		
 	}
 	
+	function getXColors(int $x){
+		$colors = array();
+		for($H=0;$H<x;$H++){
+			$h = $H/$x;
+			$RGB = HSV_TO_RGB($h,0.7,1);
+			$colors[] = '#' . substr(dechex(pow(256,3)+(int)$RGB['R']*256*256+(int)$RGB['G']*256+(int)$RGB['B']),1); 
+		}
+		return $colors;
+	}
+	
 	function htmlHex($RGB){
 		if (!(isset($RGB['R'])) and !(isset($RGB['R'])) and !(isset($RGB['R']))){
 			echo 'ERREUR : tableau en entrée invalide';
@@ -245,9 +255,19 @@
 	//$maxPrix=round($maxPrix/pow(10,floor(log10($maxPrix))),1)*pow(10,floor(log10($maxPrix)));
 	
 	
-	if ($_GET['type'] == 'nb') {$y->set_range( 0, smartFloor($maxNb) );}
-	else if ($_GET['type'] == 'prix') {$y->set_range( 0, smartFloor($maxPrix) );}
-	else if ($_GET['type'] == 'km') {$y->set_range( 0, smartFloor($maxKm) );}
+	if ($_GET['type'] == 'nb') {
+		$y->set_range( 0, smartFloor($maxNb) );
+		$chart->set_title(new title('nombre d annonces par model et par an'));
+	}
+	else if ($_GET['type'] == 'prix') {
+		$y->set_range( 0, smartFloor($maxPrix) );
+		$chart->set_title(new title('prix moyen par model et par an'));
+	}
+	else if ($_GET['type'] == 'km') {
+		$y->set_range( 0, smartFloor($maxKm) );
+		$chart->set_title(new title('kilometrage moyen par model et par an'));
+	}
+	
 	$y->set_steps(10);
 	$chart->set_y_axis( $y );
 	$chart->set_bg_colour( '#666666' );
