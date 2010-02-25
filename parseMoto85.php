@@ -2,6 +2,7 @@
 	// page appelée par saisie.php 
 	// on recupere les données du formulaire 
 	require "entete.php";
+	entete();
 	require_once "annonce.class.php";
 	$temps_debut = microtime(true);
 	
@@ -83,4 +84,5 @@
 	$temps_fin = microtime(true);
 	echo '<div class="piedFond" style="text-align: right; font-size: 0.7em;"> Temps d\'execution : '.round($temps_fin - $temps_debut, 4) . ' secondes </div>';
 	require "pied.php";
+	pied();
 ?>

@@ -1,213 +1,59 @@
 <?php
 	
+		include "./graphUtils.php";
 	
+
+	echo '<table>';
 	
-	function randHexColor(){
-	
-		$h = rand(0,2)/3;
-		echo $h . " ";
-		$RGB = HSV_TO_RGB($h,1,0.5);
-		// echo $RGB['R'] . '  -  ' . $RGB['G']  . '  -  ' . $RGB['B'] . '<br/>' ;
-		//return '#' . dechex($RGB['R']).dechex($RGB['G']).dechex($RGB['B']); // ne marche pas ! car dechex(0) = 0, et non 00 ! 
-		//return '#' . dechex($RGB['R']*256*256+$RGB['G']*256+$rgb[B]); //toujours pas ! si $RGB['R'] = 0, on as le meme probleme.
-		return '#' . substr(dechex(pow(256,3)+$RGB['R']*256*256+$RGB['G']*256+$RGB['B']),1); //roh, je suis un truant !
-		
+	echo '<tr>';
+	$colors = (getXColorsInAngle(10,0.7,1,2,3));
+	foreach ($colors as $color) {
+		echo '<td style="color:' . $color . ';background-color:' . $color . ';">a</td>';
 	}
+	echo '</tr>';
 	
-	function getXColors($x){
-		$colors = array();
-		for($H=0;$H<x;$H++){
-			$h = $H/$x;
-			echo $h;
-			$RGB = HSV_TO_RGB($h,0.7,1);
-			$colors[] = '#' . substr(dechex(pow(256,3)+(int)$RGB['R']*256*256+(int)$RGB['G']*256+(int)$RGB['B']),1); 
-		}
-		return $colors;
+	echo '<tr><td> here </td></tr>';
+	echo '<tr>';
+	
+		$colors = (getXColorsInAngle(10,0.7,1,0,0.5));
+		foreach ($colors as $color) {
+		echo '<td style="color:' . $color . ';background-color:' . $color . ';">a</td>' . "\n";
 	}
+	echo '</tr>';
 	
-	function randHexColor2(){
-		
-		return '#' . (dechex(rand(50,240)).dechex(rand(50,240)).dechex(rand(50,241)));
-		
-		
+	
+	
+	
+	
+	
+	echo '<tr>';
+	$offset=0.5;
+		$colors = (getXColorsInAngle(10,0.7,1,0+$offset,1/3+$offset));
+		foreach ($colors as $color) {
+		echo '<td style="color:' . $color . ';background-color:' . $color . ';">a</td>' . "\n";
 	}
-	
-	function RGB_TO_HSV ($R, $G, $B){
-	// RGB Values:Number 0-255
-	// HSV Results:Number 0-1
-	
-		$HSL = array();
-
-		$var_R = ($R / 255);
-		$var_G = ($G / 255);
-		$var_B = ($B / 255);
-
-		$var_Min = min($var_R, $var_G, $var_B);
-		$var_Max = max($var_R, $var_G, $var_B);
-		$del_Max = $var_Max - $var_Min;
-
-		$V = $var_Max;
-
-		if ($del_Max == 0){
-			
-			$H = 0;
-			$S = 0;
-			
-		}else{
-			$S = $del_Max / $var_Max;
-
-			$del_R = ( ( ( $max - $var_R ) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
-			$del_G = ( ( ( $max - $var_G ) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
-			$del_B = ( ( ( $max - $var_B ) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
-
-			if ($var_R == $var_Max) $H = $del_B - $del_G;
-			else if ($var_G == $var_Max) $H = ( 1 / 3 ) + $del_R - $del_B;
-			else if ($var_B == $var_Max) $H = ( 2 / 3 ) + $del_G - $del_R;
-
-			if (H<0) $H++;
-			if (H>1) $H--;
-		}
-
-		$HSL['H'] = $H;
-		$HSL['S'] = $S;
-		$HSL['V'] = $V;
-
-		return $HSL;
+echo '<tr></tr>';
+		$colors = (getXColorsInAngle(10,0.7,1,1/3+$offset,2/3+$offset));
+		foreach ($colors as $color) {
+		echo '<td style="color:' . $color . ';background-color:' . $color . ';">b</td>'. "\n";
 	}
-
-	function HSV_TO_RGB ($H, $S, $V){
-		// HSV Values:Number 0-1
-		// RGB Results:Number 0-255
-		$RGB = array();
-
-		if($S == 0)
-		{
-			$R = $G = $B = $V * 255;
-		}
-		else
-		{
-			$var_H = $H * 6;
-			$var_i = floor( $var_H );
-			$var_1 = $V * ( 1 - $S );
-			$var_2 = $V * ( 1 - $S * ( $var_H - $var_i ) );
-			$var_3 = $V * ( 1 - $S * (1 - ( $var_H - $var_i ) ) );
-
-			if ($var_i == 0) { $var_R = $V ; $var_G = $var_3 ; $var_B = $var_1 ; }
-			else if ($var_i == 1) { $var_R = $var_2 ; $var_G = $V ; $var_B = $var_1 ; }
-			else if ($var_i == 2) { $var_R = $var_1 ; $var_G = $V ; $var_B = $var_3 ; }
-			else if ($var_i == 3) { $var_R = $var_1 ; $var_G = $var_2 ; $var_B = $V ; }
-			else if ($var_i == 4) { $var_R = $var_3 ; $var_G = $var_1 ; $var_B = $V ; }
-			else { $var_R = $V ; $var_G = $var_1 ; $var_B = $var_2 ; }
-
-			$R = $var_R * 255;
-			$G = $var_G * 255;
-			$B = $var_B * 255;
-		}
-
-		$RGB['R'] = $R;
-		$RGB['G'] = $G;
-		$RGB['B'] = $B;
-
-		return $RGB;
-	}
+echo '<tr></tr>';
 	
-	function smartFloor($i, $rupture = 0.77) {
-		if (log10($i) - (int)log10($i) < $rupture) {
-			return ceil($i/pow(10,floor(log10($i)))) * pow(10,floor(log10($i)));
-		} else {
-			return ceil($i/pow(10,ceil(log10($i)))) * pow(10,ceil(log10($i)));
-		}
-	}
-	
-	// for ($i=0;$i<100;$i++) {
-		// $colors[] = randHexColor();
-		// $ucolors = array_unique ($colors);
-	// }
-	
-	// print_r($ucolors);
-		// unset($colors);
-		// for ($i=0;$i<100;$i++) {
-		// $colors[] = rand(0,2)/3;
-		// $ucolors = array_unique ($colors);
-	// }
-	
-	// print_r($ucolors);
-	
-	
-	
-	
-	
-	function tsv2rgb($T,$S,$V){
-		$r = (double)0;
-		$g = (double)0;
-		$b =(double)0;
-		$t = (double)$T;
-		$s = (double)$S;
-		$v = (double)$V;
-	
-		$h = floor($t/60)%6;
-		
-		$f = $t/60 - $h;
-		$l=$v*(1-$s);
-		$m=$v*(1-$f*$s);
-		$n=$v*(1-(1-$f)*$s);
-		
-		switch ($h){
-			case 0: 
-				$r=$v;
-				$g=$n;
-				$b=$l;
-				break;
-				
-			case 1: 
-				$r=$m;
-				$g=$v;
-				$b=$l;
-				break;
-				
-			case 2: 
-				$r=$l;
-				$g=$v;
-				$b=$n;
-				break;
-				
-			case 3: 
-				$r=$l;
-				$g=$m;
-				$b=$v;
-				break;
-				
-			case 4: 
-				$r=$n;
-				$g=$L;
-				$b=$v;
-				break;
-				
-			case 5: 
-				$r=$v;
-				$g=$l;
-				$b=$m;
-				break;
-				
-		}
-		$RGB['r'] = (int)($r*255);
-		$RGB['g'] = (int)($g*255);
-		$RGB['b'] = (int)($b*255);
-		return $RGB;
+		$colors = (getXColorsInAngle(10,0.7,1,2/3+$offset,1+$offset));
+		foreach ($colors as $color) {
+		echo '<td style="color:' . $color . ';background-color:' . $color . ';">c</td>'. "\n";
 	}
 	
 	
-	for ($i=0;$i<100;$i++){
-		$values[] = HSV_TO_RGB(rand(0,2)/3 , 1 , 0.49);
-		$values2[] = tsv2rgb(rand(0,2)/3*360 , 1 , 0.49);
+	echo '</tr><tr>';
+	$colors = (getXAlternateColors3(10,0.7,1));
+	foreach ($colors as $color) {
+		echo '<td style="color:' . $color . ';background-color:' . $color . ';">a</td>'. "\n";
 	}
-	
-	echo print_r(array_unique($values));
-	echo '<br/>';
-	echo print_r(array_unique($values2));
+	echo '</tr>';
 	
 	
-	print_r(getXColors(3));
+	echo '<table>';
 	
 	
 	

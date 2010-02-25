@@ -1,9 +1,9 @@
 ﻿<?php
 	require "entete.php";
 	$charts=array();
-	$charts['parNb'] = 'ofcCompare1.php?type=nb';
-	$charts['parPrix'] = 'ofcCompare1.php?type=prix';
-	$charts['parKm'] = 'ofcCompare1.php?type=km';
+	$charts['parNb'] = 'ofcCompare.php?type=nb';
+	$charts['parPrix'] = 'ofcCompare.php?type=prix';
+	$charts['parKm'] = 'ofcCompare.php?type=km';
 	entete(true,$charts);
 ?>
 <p>Comparaisons basées sur le types</p>
