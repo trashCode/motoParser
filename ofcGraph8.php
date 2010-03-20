@@ -71,7 +71,7 @@ $chart->set_bg_colour( '#444444' );
 
 $title = new title( date("D M d Y") );
 $chart->set_title( $title );
-	$sql='select model,km,prix,annee from annonce';
+	$sql='select model,km,prix,origine,annee from annonce';
 	$rs = mysql_query($sql);
 
 	while ($row = mysql_fetch_assoc($rs)) {
@@ -80,6 +80,7 @@ $chart->set_title( $title );
 		if ($row['prix']>$maxY) {$maxY=$row['prix'];}
 		
 		$couleur=getCouleur($row['annee']);
+		if ($row['origine'] == 'perso') {$couleur ='#ff87ff';}
 		
 		$scatter = new scatter( '#000000', 4 );
 		$scatter->set_default_dot_style( new s_star($couleur, 4) );

@@ -12,45 +12,45 @@
 	// }
 	// echo '</tr>';
 	
-	echo '<tr><td> here </td></tr>';
-	echo '<tr>';
-	
-		$colors = (getXColorsInAngle(10,0.7,1,0.75,0.25));
-		foreach ($colors as $color) {
-		echo '<td style="color:' . $color . ';background-color:' . $color . ';">a</td>' . "\n";
-	}
-	echo '</tr>';
-	
-	
-	
-	
-	
-	
+	// echo '<tr><td> here </td></tr>';
 	// echo '<tr>';
-	// $offset=0.5;
-		// $colors = (getXColorsInAngle(10,0.7,1,0+$offset,1/3+$offset));
+	
+		// $colors = (getXColorsInAngle(10,0.7,1,0.75,0.25));
 		// foreach ($colors as $color) {
 		// echo '<td style="color:' . $color . ';background-color:' . $color . ';">a</td>' . "\n";
 	// }
-// echo '<tr></tr>';
-		// $colors = (getXColorsInAngle(10,0.7,1,1/3+$offset,2/3+$offset));
-		// foreach ($colors as $color) {
-		// echo '<td style="color:' . $color . ';background-color:' . $color . ';">b</td>'. "\n";
-	// }
-// echo '<tr></tr>';
-	
-		// $colors = (getXColorsInAngle(10,0.7,1,2/3+$offset,1+$offset));
-		// foreach ($colors as $color) {
-		// echo '<td style="color:' . $color . ';background-color:' . $color . ';">c</td>'. "\n";
-	// }
-	
-	
-	// echo '</tr><tr>';
-	// $colors = (getXAlternateColors3(10,0.7,1));
-	// foreach ($colors as $color) {
-		// echo '<td style="color:' . $color . ';background-color:' . $color . ';">a</td>'. "\n";
-	// }
 	// echo '</tr>';
+	
+	
+	
+	
+	
+	
+	echo '<tr>';
+	$offset=(float)$_GET['offset'];
+		$colors = (getXColorsInAngle(5,0.7,1,0+$offset,1/3+$offset));
+		foreach ($colors as $color) {
+		echo '<td style="color:' . $color . ';background-color:' . $color . ';">a</td>' . "\n";
+	}
+echo '<tr></tr>';
+		$colors = (getXColorsInAngle(5,0.7,1,1/3+$offset,2/3+$offset));
+		foreach ($colors as $color) {
+		echo '<td style="color:' . $color . ';background-color:' . $color . ';">b</td>'. "\n";
+	}
+echo '<tr></tr>';
+	
+		$colors = (getXColorsInAngle(5,0.7,1,2/3+$offset,1+$offset));
+		foreach ($colors as $color) {
+		echo '<td style="color:' . $color . ';background-color:' . $color . ';">c</td>'. "\n";
+	}
+	
+	
+	echo '</tr><tr>';
+	$colors = (getXAlternateColors3(5,0.7,1,$offset));
+	foreach ($colors as $color) {
+		echo '<td style="color:' . $color . ';background-color:' . $color . ';">a</td>'. "\n";
+	}
+	echo '</tr>';
 	
 	
 	echo '<table>';
