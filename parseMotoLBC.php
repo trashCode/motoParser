@@ -16,7 +16,8 @@
 			}
 		fclose ($source);
 		
-		$number = preg_match_all ( '/vi\/(\d+)\.htm/' , $html , $resultat);
+		// $number = preg_match_all ( '/vi\/(\d+)\.htm/' , $html , $resultat);
+		$number = preg_match_all ( '/motos\/(\d+)\.htm/' , $html , $resultat);
 		// echo print_r(array_unique($lignes));
 		$lignes = $resultat[0];
 		
