@@ -17,17 +17,18 @@
 	<br/>
 	
 	
-	<form method="post" action="parseMotoLBC.php">
+	<form method="post" action="parseMotoLBC.php" enctype="multipart/form-data">
 	<table>
 		<tr><td> url : </td><td> <input type="text" name="annonceUrl" maxlength=255 size=50 /> </td></tr>
 		<tr><td> Type : </td><td> <input type="text" name="type" maxlength=255 size=50 /> </td></tr>
 		<tr><td> Marque : </td><td> <input type="text" name="marque" maxlength=255 size=50 /> </td></tr>
 		<tr><td> Model : </td><td> <input type="text" name="model" maxlength=255 size=50 /></td> </tr>
 		<tr><td> Cylindrée : </td><td> <input type="text" name="cylindre" maxlength=255 size=50 /> </td></tr>
+		<tr><td> Fichier : </td><td> <input type="file" name="fichier" size=50 /> </td></tr>
 		</table>
 			<input type="radio" name="typeTarget" value=0 /> Liste Annonce<br/>
 			<input type="radio" name="typeTarget" value=1 /> Annonce seule<br/>
-			<input type="radio" name="typeTarget" value=2 /> Dossier contenant Listes Annonces (/var/www/offline)<br/>
+			<input type="radio" name="typeTarget" value=2 /> Fichier de listes (multiples URLS)<br/>
 	<input type="submit" value="Annonce LBC" >
 	</form>
 	<br/>

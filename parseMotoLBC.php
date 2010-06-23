@@ -25,6 +25,19 @@
 		
 	}
 	
+	function extraireListes($file){
+		$source = fopen($file,r);
+		$listes = array();
+		while (!feof($source)){
+			$line = fgets($source);
+			if (!empty($line)){
+				$listes[] = $line;
+			}
+		}
+		fclose ($source);
+		return $listes;
+	}
+	
 	function parseSingle($url){
 				$annonce = new annonce($url);
 				
@@ -47,6 +60,15 @@
 				}
 	}
 	
+	function parseMultiple($urlsearch){
+		$urls=extraireUrls($urlsearch);
+			foreach ($urls as $url) {
+				echo  '<div> parsing : ' . $url . '<br/>';
+				parseSingle('http://www.leboncoin.fr/' .$url);
+			}
+	}
+	
+	
 	$url = htmlspecialchars($_POST['annonceUrl']);
 	echo '<h1>'. (int)$_POST['typeTarget'].'</h1>';
 	
@@ -65,17 +87,18 @@
 		{
 		// parsing d'une url contenant une liste d'annonce.
 		
-			echo '<p>' . $_POST['annonceUrl'] .'</p>';
-			$urls=extraireUrls($_POST['annonceUrl']);
-			foreach ($urls as $url) {
-				echo  '<div> parsing : ' . $url . '<br/>';
-				parseSingle('http://www.leboncoin.fr/' .$url);
-			}
+			parseMultiple($_POST['annonceUrl']);
+			
 		}
 		break;
 	
 	case 2 :
 		{
+			//reception d'un fichier contenant des URLS a parser.
+			var_dump($_FILES['fichier']['tmp_name']);
+			foreach (extraireListes($_FILES['fichier']['tmp_name']) as $key => $val){
+				parseMultiple($val);
+			}
 		//// parsing de tous les fichiers htm html source d'un dossier.
 		
 		// $MyDirectory = opendir('/var/www/moto/offline') or die('Erreur');
