@@ -28,7 +28,7 @@
 	}
 	
 	//on genere une couleur par model;
-	$colors = getXAlternateColors3($nbModels,0.5,1,0.07);
+	$colors = getXAlternateColors3($nbModels,0.66,1,0.07);
 	
 	//compteur pour mise a l echelle du graph
 	$maxNb=0;

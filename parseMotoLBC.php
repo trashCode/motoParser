@@ -25,32 +25,8 @@
 		
 	}
 	
-	
-	$url = htmlspecialchars($_POST['annonceUrl']);
-	echo '<h1>'. (int)$_POST['typeTarget'].'</h1>';
-	
-	switch ((int)$_POST['typeTarget']) {
-		
-		
-		case 1:
-		{
-		// Parsing d'un url contenant une seule annnonce
-		
-			$annonce = new annonce($url);
-			$annonce->storeToDB();
-			
-			
-		} 
-		break;
-	case 0 :
-		{
-		// parsing d'une url contenant une liste d'annonce.
-		
-			echo '<p>' . $_POST['annonceUrl'] .'</p>';
-			$urls=extraireUrls($_POST['annonceUrl']);
-			foreach ($urls as $url) {
-				echo  '<div>' . $url . '<br/>';
-				$annonce = new annonce('http://www.leboncoin.fr/' .$url);
+	function parseSingle($url){
+				$annonce = new annonce($url);
 				
 				if ($annonce->getType() == '') { $annonce->setType(mysql_real_escape_string($_POST['type']));}
 				if ($annonce->getMarque() == '') {$annonce->setMarque(mysql_real_escape_string($_POST['marque']));}
@@ -61,39 +37,64 @@
 					$annonce->storeToDB();
 				echo '</div>' ."\n";
 				} else {
-					echo 'Erreur:<br/>';
-					echo '<a href="'.$annonce->getDetailURL() .'"> URL  </a> <br/>';
-					echo 'Code postal: '.$annonce->getCp() .'<br/>';
-					echo 'Prix: '.$annonce->getPrix() .'<br/>';
-					echo 'Km: '.$annonce->getKm() .'<br/>';
-					echo 'Annee: '.$annonce->getAnnee() .'<br/>';
+					echo '<table> <tr> <td> Erreur:</td><td>';
+					echo '<a href="'.$annonce->getDetailURL() .'"> URL  </a> </td> </tr>';
+					echo '<tr><td>Code postal: </td><td> '.$annonce->getCp() .'</td></tr>';
+					echo '<tr><td>Prix: </td><td>'.$annonce->getPrix() .'</td></tr>';
+					echo '<tr><td>Km: </td><td>'.$annonce->getKm() .'</td></tr>';
+					echo '<tr><td>Annee: </td><td>'.$annonce->getAnnee() .'</td></tr></table>';
 					echo '</div>';
 				}
+	}
+	
+	$url = htmlspecialchars($_POST['annonceUrl']);
+	echo '<h1>'. (int)$_POST['typeTarget'].'</h1>';
+	
+	switch ((int)$_POST['typeTarget']) {
+		
+		
+		case 1:
+		{
+		// Parsing d'un url contenant une seule annnonce
+	
+			parseSingle('http://www.leboncoin.fr/' .$url);
+			
+		} 
+		break;
+	case 0 :
+		{
+		// parsing d'une url contenant une liste d'annonce.
+		
+			echo '<p>' . $_POST['annonceUrl'] .'</p>';
+			$urls=extraireUrls($_POST['annonceUrl']);
+			foreach ($urls as $url) {
+				echo  '<div> parsing : ' . $url . '<br/>';
+				parseSingle('http://www.leboncoin.fr/' .$url);
 			}
 		}
 		break;
 	
 	case 2 :
 		{
-		// parsing de tous les fichiers htm html source d'un dossier.
+		//// parsing de tous les fichiers htm html source d'un dossier.
 		
-		$MyDirectory = opendir('/var/www/moto/offline') or die('Erreur');
-			echo 'opendir ok <br/>';
-			while($Entry = @readdir($MyDirectory)) {
-				if(is_dir($Directory.'/'.$Entry)) {
-				//gerer l'erreur
-				}
-				else {
-					echo 'Traitement de : <b>'. $Entry.'</b> <br/>';
-					$urls=extraireUrls('/var/www/moto/offline/'.$Entry);
-					foreach ($urls as $url) {
-						$annonce = new annonce('http://moto85.com/' .$url);
-						$annonce->storeToDB();
-					}
+		// $MyDirectory = opendir('/var/www/moto/offline') or die('Erreur');
+			// echo 'opendir ok <br/>';
+			// while($Entry = @readdir($MyDirectory)) {
+				// if(is_dir($Directory.'/'.$Entry)) {
+				////gerer l'erreur
+				// }
+				// else {
+					// echo 'Traitement de : <b>'. $Entry.'</b> <br/>';
+					// $urls=extraireUrls('/var/www/moto/offline/'.$Entry);
+					// foreach ($urls as $url) {
+						// $annonce = new annonce('http://moto85.com/' .$url);
+						// $annonce->storeToDB();
+					// }
 					
-				}
-			}
-			closedir($MyDirectory);
+				// }
+			// }
+			// closedir($MyDirectory);
 		}
 		break;
 	}
