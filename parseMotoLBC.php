@@ -9,9 +9,10 @@
 	
 	
 	function extraireUrls($inputUrl){
-		
+		echo 'extraireUrls Called : ' . $inputUrl .'<br/>';
 		$source= fopen($inputUrl,r);
 		while (!feof($source)) {
+				echo '*';
 				$html .= fgets ($source);
 			}
 		fclose ($source);
@@ -30,8 +31,12 @@
 		$listes = array();
 		while (!feof($source)){
 			$line = fgets($source);
+			//$line = trim($line); //marche, sauf peu etre pour les mac (fgets a un comportement bizzard)
+			$line = str_replace(array("\n" , "\r"), "" , $line); //les retour charriot n'ont pas leur place dans une URL, il font echouer la requete HTTP GET
+			
 			if (!empty($line)){
 				$listes[] = $line;
+				var_dump($line);
 			}
 		}
 		fclose ($source);
@@ -61,7 +66,9 @@
 	}
 	
 	function parseMultiple($urlsearch){
+		echo 'parseMultiple Called : ' . $urlsearch .'<br/>';
 		$urls=extraireUrls($urlsearch);
+		echo 'annonce trouvées: <b>' .sizeof($urls) . '</b><br/>';
 			foreach ($urls as $url) {
 				echo  '<div> parsing : ' . $url . '<br/>';
 				parseSingle('http://www.leboncoin.fr/' .$url);
@@ -97,7 +104,8 @@
 			//reception d'un fichier contenant des URLS a parser.
 			var_dump($_FILES['fichier']['tmp_name']);
 			foreach (extraireListes($_FILES['fichier']['tmp_name']) as $key => $val){
-				parseMultiple($val);
+				echo '<h3>parsing : ' .$val. '</h3>';
+				//parseMultiple($val);
 			}
 		//// parsing de tous les fichiers htm html source d'un dossier.
 		
