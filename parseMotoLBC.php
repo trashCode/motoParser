@@ -32,7 +32,7 @@
 		$ccs= $rs['amp;ccs'];//ccs = mini
 		$cce= $rs['amp;cce'];//cce=maxi
 		
-		$_POST['type']=$q.$ccs;
+		$_POST['type']=$q.'-'.$ccs;
 		
 		
 		//$chaineComplete =$resultat[0];

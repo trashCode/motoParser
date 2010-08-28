@@ -39,6 +39,9 @@
 	<input type="submit" value="Purger la Base de données" >
 	</form>
 	<br/>
+	<form method="post" action="trierAnnonce.php">
+	<input type="submit" value="supprimer annonce indésirables" >
+	</form>
 	<br/>
 
 <?php
