@@ -13,7 +13,7 @@
 	?>
 		<script type="text/javascript" src="swfobject/swfobject.js"></script>
 			<script type="text/javascript">
-		swfobject.embedSWF("open-flash-chart.swf", "<?php echo $titre; ?>", "600", "300", "9.0.0","expressInstall.swf",{"data-file":"<?php echo $dataFile;?>"});
+		swfobject.embedSWF("open-flash-chart.swf", "<?php echo $titre; ?>", "1000", "300", "9.0.0","expressInstall.swf",{"data-file":"<?php echo $dataFile;?>"});
 		</script>
 	<?php	
 			}
