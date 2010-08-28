@@ -7,8 +7,51 @@
 	$temps_debut = microtime(true);
 	
 	
+	function extraireLastUrl($inputUrl){
+		//liste toutes les urls d'un resultat de recherche pour pouvoir les parser page par page
+		//sinon, on ne traite que les 50 premiers...
+		
+		//recuperation page HTML
+		$source= fopen($inputUrl,r);
+		while (!feof($source)) {
+				$html .= fgets ($source);
+			}
+		fclose ($source);
+		
+		//recherche derniere page.
+		$nb = preg_match ( '/href="(.+)"\>Derni&egrave;re page/' , $html , $resultat);
+		$lastUrl = $resultat[1];
+
+		//extraction numero page
+		
+		$nb = preg_match('/(.+\?o=)(\d+)(\&.+)/' , $lastUrl , $resultat);
+		
+		//extraction parametres de la requete (pour renseigner le type moto dans l'annonce)
+		parse_str($lastUrl,$rs);
+		$q= $rs['amp;q'];
+		$ccs= $rs['amp;ccs'];//ccs = mini
+		$cce= $rs['amp;cce'];//cce=maxi
+		
+		$_POST['type']=$q.$ccs;
+		
+		
+		//$chaineComplete =$resultat[0];
+		$debut=$resultat[1];
+		$numeroLastPage=$resultat[2];
+		$fin=$resultat[3];
+		
+		//generation toutes pages.
+		$return=array();
+		for ($numeroLastPage;$numeroLastPage>0;$numeroLastPage--){
+			$return[] = htmlspecialchars_decode($debut.$numeroLastPage.$fin);
+		}
+
+		return $return;
+		
+	}
 	
 	function extraireUrls($inputUrl){
+		//recupere les urls des annonces a partir de l'url des resultat de recherche
 		echo 'extraireUrls Called : ' . $inputUrl .'<br/>';
 		$source= fopen($inputUrl,r);
 		while (!feof($source)) {
@@ -27,6 +70,7 @@
 	}
 	
 	function extraireListes($file){
+		//recupere les urls de resultat de recherche a partir d'un fichier
 		$source = fopen($file,r);
 		$listes = array();
 		while (!feof($source)){
@@ -44,6 +88,7 @@
 	}
 	
 	function parseSingle($url){
+		//traite l'url d'une annonce simple
 				$annonce = new annonce($url);
 				
 				if ($annonce->getType() == '') { $annonce->setType(mysql_real_escape_string($_POST['type']));}
@@ -66,6 +111,7 @@
 	}
 	
 	function parseMultiple($urlsearch){
+		//traite toute les urls d'annonces simple a partir de l'url d'un resultat de recherche
 		echo 'parseMultiple Called : ' . $urlsearch .'<br/>';
 		$urls=extraireUrls($urlsearch);
 		echo 'annonce trouvées: <b>' .sizeof($urls) . '</b><br/>';
@@ -105,7 +151,11 @@
 			var_dump($_FILES['fichier']['tmp_name']);
 			foreach (extraireListes($_FILES['fichier']['tmp_name']) as $key => $val){
 				echo '<h3>parsing : ' .$val. '</h3>';
-				//parseMultiple($val);
+				//recuperation derniere page :
+				$listeSearchUrl = extraireLastUrl($val);
+				foreach($listeSearchUrl as $key => $val){
+					parseMultiple($val);
+				}
 			}
 		//// parsing de tous les fichiers htm html source d'un dossier.
 		
