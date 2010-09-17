@@ -5,7 +5,7 @@
 	entete();
 	require_once "annonce.class.php";
 	$temps_debut = microtime(true);
-	
+	set_time_limit(600);// si c pas fini en 10 minutes, c'est que c'est planté?
 	
 	function extraireLastUrl($inputUrl){
 		//liste toutes les urls d'un resultat de recherche pour pouvoir les parser page par page
