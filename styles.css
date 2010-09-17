@@ -129,3 +129,19 @@ caption {
 
 font-family: sans-serif;
 }
+
+fieldset{
+color:white;
+background-color:#888888;
+}
+
+legend{
+	font:75% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
+	font-weight:bold;
+	border-style:solid;
+	border-width:2px;
+	border-color:#000000;
+	color:#CCFF00;
+	background-color:#666666;
+	
+}

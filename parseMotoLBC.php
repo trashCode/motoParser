@@ -121,7 +121,8 @@
 			}
 	}
 	
-	
+	// ############## MAIN ####################
+	// on recupere les données du formulaire
 	$url = htmlspecialchars($_POST['annonceUrl']);
 	echo '<h1>'. (int)$_POST['typeTarget'].'</h1>';
 	
