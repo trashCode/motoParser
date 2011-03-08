@@ -48,7 +48,7 @@
 		} else {
 			$i--;
 			printf('<tr class="ligne2" align="center"> 
-					<td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s€ </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> 
+					<td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s€ </td> <td> %s km</td> <td> %s </td> <td> %s </td> <td> %s </td> 
 					<td> <div class="buttons"> <a href="%s"> lien</a> </div> </td>
 					<td><div class="buttons"> <a href="deleteFromAnnonceId.php?id=%s"> X</a> </div></td>
 					</tr>'
