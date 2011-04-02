@@ -71,7 +71,7 @@ $chart->set_bg_colour( '#444444' );
 
 $title = new title( date("D M d Y") );
 $chart->set_title( $title );
-	$sql='select model,km,prix,annee from annonce WHERE prix<6000';
+	$sql='select model,km,prix,annee from annonce WHERE type="ZX6R-600"';
 	$rs = mysql_query($sql);
 
 	while ($row = mysql_fetch_assoc($rs)) {
@@ -102,7 +102,7 @@ $x->tick_height(5);
 $chart->set_x_axis( $x );
 
 $y = new y_axis();
-$y->set_range( 0, 6000 );
+$y->set_range( 0, $maxY );
 $y->set_steps(1000);
 $chart->add_y_axis( $y );
 
