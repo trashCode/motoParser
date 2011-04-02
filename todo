@@ -12,3 +12,7 @@ todo
 == Annonces LBC 
 	pas mal d'annonces non parsées pour cause de données manquantes.
 	prevoir un petit formulaire pour completer les manques a la main ? L'ideal : une frame avec une preview de l'annonce, pour la lire en meme temps :)
+
+=== interface : 
+	Pouvoir afficher des messages comme sur stack exchange
+	Probablement via des variables de session.

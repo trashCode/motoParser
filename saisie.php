@@ -43,11 +43,15 @@
 	<fieldset>
 	<legend> Gestion BDD</legend>
 	<form method="post" action="purgeAnnonce.php">
-	<input type="submit" value="Purger la Base de données" >
+		<input type="submit" value="Purger la Base de données" >
 	</form>
 	<br/>
 	<form method="post" action="trierAnnonce.php">
-	<input type="submit" value="supprimer annonce indésirables" >
+		<input type="submit" value="supprimer annonce indésirables" >
+	</form>
+	<br/>
+	<form method="post" action="saveLotAnnonce.php">
+		<input type="submit" value="sauvegarder lot d'annonces" >
 	</form>
 	</fieldset>
 	<br/>
