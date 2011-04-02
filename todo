@@ -7,22 +7,8 @@ todo
 	
 
 
-problemes :
-	pour le momment je parse des pages HTML. un visiteur ne peux pas choisir quel type de moto il souhaite. il faut qu'il fasse une recherche préalable sur les differents site.
-	idée : un add on firefox pour qui envois directement les fichiers sur le serveur. (il faudra securiser les fichiers contre les plaisantins)
-	sous probleme : moins captation du lecteur, donc moins de pub, et potentiellement moins de revenu.
-	
-	
 	idée : ajouter la localisation des vehicules en fonction du code postal. puis calculer la distance par rapport a une addresse donnée. necessite forte connaissance google maps API
 
 == Annonces LBC 
 	pas mal d'annonces non parsées pour cause de données manquantes.
 	prevoir un petit formulaire pour completer les manques a la main ? L'ideal : une frame avec une preview de l'annonce, pour la lire en meme temps :)
-
-== toutes annonces
-	prevoir des suppression semi-auto (avec visualisation des données avant suppression) post importation :
-	exemple: tout ce qui est de type XXX et ne contient pas XXX, ou prix < 1500  ou km < 200 , etc...
-
-== faire des graph comparatifs des models
-	prix moyen par model / année
-	km moyen par model / année
