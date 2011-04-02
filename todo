@@ -16,3 +16,9 @@ todo
 === interface : 
 	Pouvoir afficher des messages comme sur stack exchange
 	Probablement via des variables de session.
+
+=== structure :
+	Les fonctions devrait etre callable depuis un autre fichier PHP (par exemple, une interface ligne de commande)
+	créer plusieurs threads, pour afficher le parsing en meme temps qu'il progresse.
+	sous probleme : communication inter-threads.
+		ajax?
